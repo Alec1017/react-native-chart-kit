@@ -4,11 +4,19 @@ import { LinearGradient, Line, Text, Defs, Stop } from "react-native-svg";
 
 class AbstractChart extends Component {
   calcScaler = data => {
+    if (this.props.fromZero && this.props.setMax) {
+      return Math.max(...data, this.props.setMax, 0) - Math.min(...data, this.props.setMax, 0) || 1;
+    }
+
     if (this.props.fromZero) {
       return Math.max(...data, 0) - Math.min(...data, 0) || 1;
-    } else {
-      return Math.max(...data) - Math.min(...data) || 1;
     }
+
+    if (this.props.setMax) {
+      return Math.max(...data, this.props.setMax) - Math.min(...data, this.props.setMax) || 1;
+    }
+
+    return Math.max(...data) - Math.min(...data) || 1;
   };
 
   calcBaseHeight = (data, height) => {

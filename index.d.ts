@@ -87,6 +87,10 @@ export interface LineChartProps {
    */
   fromZero?: boolean;
   /**
+   * Render charts with a max value if no data exceeds it. - default: 0.
+   */
+  setMax: number;
+  /**
    * Prepend text to horizontal labels -- default: ''.
    */
   yAxisLabel?: string;
